@@ -1,6 +1,8 @@
 package com.rfinnigan.fartshaker;
 
 
+import java.lang.reflect.Field;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -81,8 +83,7 @@ public class MainActivity extends Activity{
 			   
 			}});
 		mp.start();
-		//mp.release();
-		//Toast.makeText(this.getBaseContext(), "Player released", Toast.LENGTH_LONG);
+		
 	}
 
 	/** 
@@ -120,6 +121,7 @@ public class MainActivity extends Activity{
 			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 					rootView.getContext(), R.array.fart_array, R.layout.dropdown_item);
 			fartSelector.setAdapter(adapter);
+			
 
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent, View view,
@@ -129,6 +131,7 @@ public class MainActivity extends Activity{
 							"The fart is "
 									+ parent.getItemAtPosition(pos).toString(),
 									Toast.LENGTH_LONG).show();
+					
 					switch (pos){
 					case 0:
 						fartId = R.raw.fart0;
