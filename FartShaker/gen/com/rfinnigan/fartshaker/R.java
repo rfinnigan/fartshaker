@@ -45,7 +45,8 @@ public final class R {
         public static final int main=0x7f090001;
     }
     public static final class raw {
-        public static final int fart=0x7f040000;
+        public static final int fart0=0x7f040000;
+        public static final int fart1=0x7f040001;
     }
     public static final class string {
         public static final int action_settings=0x7f060003;
