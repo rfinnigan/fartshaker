@@ -1,5 +1,6 @@
 package com.rfinnigan.fartshaker;
 
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -9,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.MotionEvent;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class MainActivity extends Activity{
 	public final static String EXTRA_MESSAGE = "com.rfinnigan.fartshaker.MESSAGE";
@@ -25,8 +28,8 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
-
+		
+		//create media player
 		mp = MediaPlayer.create(this, R.raw.fart);
 
 		if (savedInstanceState == null) {
@@ -62,9 +65,8 @@ public class MainActivity extends Activity{
 	 */
 	
 	public void playFart(View view) {
-		
-			
-			mp.start();
+		//have mediaplayer play fart sound
+		mp.start();
 		
 	}
 
@@ -75,8 +77,9 @@ public class MainActivity extends Activity{
 		//do something in response to the button
 
 		Intent intent = new Intent (this, DisplayMessageActivity.class); 
-		EditText editText = (EditText) findViewById(R.id.edit_message);
-		String message = editText.getText().toString();
+		//EditText editText = (EditText) findViewById(R.id.edit_message);
+		//String message = editText.getText().toString();
+		String message = "FART!!!";
 		intent.putExtra(EXTRA_MESSAGE, message);
 		startActivity(intent);
 	}
@@ -87,6 +90,8 @@ public class MainActivity extends Activity{
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {
+			
+			
 		}
 
 		@Override
@@ -94,6 +99,25 @@ public class MainActivity extends Activity{
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
+			
+			//populate the spinner for dropdown fart selection in the fragment
+			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
+			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+					rootView.getContext(), R.array.fart_array, R.layout.dropdown_item);
+			fartSelector.setAdapter(adapter);
+			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int pos, long id) {
+					Toast.makeText(
+							parent.getContext(),
+							"The fart is "
+									+ parent.getItemAtPosition(pos).toString(),
+							Toast.LENGTH_LONG).show();
+				}
+
+				public void onNothingSelected(AdapterView<?> parent) {
+				}
+			});
 			return rootView;
 		}
 	}
