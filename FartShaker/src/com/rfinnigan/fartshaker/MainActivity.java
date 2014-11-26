@@ -126,13 +126,29 @@ public class MainActivity extends Activity{
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
 
-			//populate the spinner for dropdown fart selection in the fragment
+			//populate the spinner with a predetermined list for dropdown fart selection in the fragment
+//			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
+//			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+//					rootView.getContext(), R.array.fart_array, R.layout.dropdown_item);
+//			fartSelector.setAdapter(adapter);
+			
+			/**
+			 * populate the spinner manually using array of Fart Sound Resource Id's
+			 */
+			//first create an empty array adapter
+			ArrayAdapter<CharSequence> adapter = 
+					new ArrayAdapter <CharSequence>(
+							rootView.getContext(),android.R.layout.simple_spinner_dropdown_item);
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			//fill with Strings (of fart names from Resources)
+			for (int i=0; i<fartSoundsArray.length;i++){
+				adapter.add(getResources().getResourceEntryName(fartSoundsArray[i]));
+			}
+			//pass the array adapter to the spinner
 			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
-			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-					rootView.getContext(), R.array.fart_array, R.layout.dropdown_item);
 			fartSelector.setAdapter(adapter);
 			
-
+			//set on item selected listener to set the fartId to the selected fart sound
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int pos, long id) {
