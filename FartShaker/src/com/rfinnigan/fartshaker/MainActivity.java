@@ -2,7 +2,6 @@ package com.rfinnigan.fartshaker;
 
 
 import java.lang.reflect.Field;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
