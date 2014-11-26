@@ -83,32 +83,16 @@ public class MainActivity extends Activity{
 		
 		//create media player & have mediaplayer play selected fart sound
 		mp = MediaPlayer.create(this, fartId);
-		//boolean released = false;
 		mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
 			public void onCompletion(MediaPlayer player) {
 			   player.release();  
-			   Log.i(TAG,"player released");
-			   
-			   
-			   
+			   Log.i(TAG,"player released");	   
 			}});
 		mp.start();
 		
 	}
 
-	/** 
-	 * Called when the user clicks the send button
-	 */
-	public void sendMessage(View view){
-		//do something in response to the button
-
-		Intent intent = new Intent (this, DisplayMessageActivity.class); 
-		//EditText editText = (EditText) findViewById(R.id.edit_message);
-		//String message = editText.getText().toString();
-		String message = "FART!!!";
-		intent.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent);
-	}
+	
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -126,11 +110,7 @@ public class MainActivity extends Activity{
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
 
-			//populate the spinner with a predetermined list for dropdown fart selection in the fragment
-//			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
-//			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-//					rootView.getContext(), R.array.fart_array, R.layout.dropdown_item);
-//			fartSelector.setAdapter(adapter);
+
 			
 			/**
 			 * populate the spinner manually using array of Fart Sound Resource Id's
@@ -158,10 +138,6 @@ public class MainActivity extends Activity{
 							"The fart is "
 									+ parent.getItemAtPosition(pos).toString(),
 									Toast.LENGTH_LONG).show();
-					
-					
-					
-					
 				}
 
 
