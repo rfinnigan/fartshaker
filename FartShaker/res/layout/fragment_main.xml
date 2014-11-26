@@ -2,22 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-     >
-     <ImageButton
+    android:orientation="vertical" >
+
+    <ImageButton
         android:id="@+id/fartButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:onClick="playFart"
-        android:src="@drawable/button_icon"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
         android:contentDescription="@string/fart_button_desc"
-        style="?android:attr/borderlessButtonStyle" />
-      <Spinner
+        android:onClick="playFart"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_icon" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="launchFartSelection"
+        android:text="@string/button_select" />
+
+    <Spinner
         android:id="@+id/fart_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom" />
+
 </LinearLayout>

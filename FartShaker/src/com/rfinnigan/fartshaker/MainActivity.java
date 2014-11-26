@@ -25,7 +25,7 @@ public class MainActivity extends Activity{
 	private MediaPlayer mp;
 	private static int fartId=R.raw.fart0;
 	private static int fartSoundsArray[] = fillSoundsArray();
-	
+
 	//string for logcat documentation
 	private final static String TAG = "fart";
 
@@ -64,12 +64,12 @@ public class MainActivity extends Activity{
 		Field[] ID_Fields = R.raw.class.getFields();
 		int[] resArray = new int[ID_Fields.length];
 		for(int i = 0; i < ID_Fields.length; i++) {
-		    try {
-		        resArray[i] = ID_Fields[i].getInt(null);
-		    } catch (IllegalArgumentException | IllegalAccessException e) {
-		        // TODO Auto-generated catch block
-		        e.printStackTrace();
-		    }
+			try {
+				resArray[i] = ID_Fields[i].getInt(null);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return resArray;
 	}
@@ -79,19 +79,25 @@ public class MainActivity extends Activity{
 	 */
 
 	public void playFart(View view) {
-		
+
 		//create media player & have mediaplayer play selected fart sound
 		mp = MediaPlayer.create(this, fartId);
 		mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
 			public void onCompletion(MediaPlayer player) {
-			   player.release();  
-			   Log.i(TAG,"player released");	   
+				player.release();  
+				Log.i(TAG,"player released");	   
 			}});
 		mp.start();
-		
+
+	}
+	/**
+	 * called when select fart button is pressed
+	 */
+	public void launchFartSelection(View view){
+		Intent intent = new Intent(this, SelectFartActivity.class);
+		startActivity(intent);
 	}
 
-	
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -110,7 +116,7 @@ public class MainActivity extends Activity{
 					false);
 
 
-			
+
 			/**
 			 * populate the spinner manually using array of Fart Sound Resource Id's
 			 */
@@ -126,7 +132,7 @@ public class MainActivity extends Activity{
 			//pass the array adapter to the spinner
 			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
 			fartSelector.setAdapter(adapter);
-			
+
 			//set on item selected listener to set the fartId to the selected fart sound
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent, View view,
