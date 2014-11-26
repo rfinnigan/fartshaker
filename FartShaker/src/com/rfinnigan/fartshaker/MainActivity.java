@@ -25,6 +25,7 @@ public class MainActivity extends Activity{
 
 	private MediaPlayer mp;
 	private static int fartId=R.raw.fart0;
+	private static int fartSoundsArray[] = fillSoundsArray();
 	
 	//string for logcat documentation
 	private final static String TAG = "fart";
@@ -33,10 +34,6 @@ public class MainActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-
-
-
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 			.add(R.id.container, new PlaceholderFragment()).commit();
@@ -63,6 +60,19 @@ public class MainActivity extends Activity{
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	public static int[] fillSoundsArray(){
+		Field[] ID_Fields = R.raw.class.getFields();
+		int[] resArray = new int[ID_Fields.length];
+		for(int i = 0; i < ID_Fields.length; i++) {
+		    try {
+		        resArray[i] = ID_Fields[i].getInt(null);
+		    } catch (IllegalArgumentException | IllegalAccessException e) {
+		        // TODO Auto-generated catch block
+		        e.printStackTrace();
+		    }
+		}
+		return resArray;
 	}
 
 	/**
@@ -126,24 +136,16 @@ public class MainActivity extends Activity{
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int pos, long id) {
+					fartId=fartSoundsArray[pos];
 					Toast.makeText(
 							parent.getContext(),
 							"The fart is "
 									+ parent.getItemAtPosition(pos).toString(),
 									Toast.LENGTH_LONG).show();
 					
-					switch (pos){
-					case 0:
-						fartId = R.raw.fart0;
-						
-						break;
-					case 1:
-						fartId = R.raw.fart1;
-						
-						break;
-					default:
-						break;
-					}
+					
+					
+					
 				}
 
 
