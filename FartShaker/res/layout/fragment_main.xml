@@ -4,13 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
      >
-     <Button
+     <ImageButton
         android:id="@+id/fartButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:onClick="playFart"
-        android:text="@string/button_fart" />
+        android:src="@drawable/button_icon"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/fart_button_desc"
+        style="?android:attr/borderlessButtonStyle" />
       <Spinner
         android:id="@+id/fart_selector"
         android:layout_width="match_parent"
