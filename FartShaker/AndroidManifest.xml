@@ -24,12 +24,8 @@
         </activity>
        
         <activity
-            android:name=".SelectFartActivity"
-            android:label="@string/title_activity_select_fart"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rfinnigan.fartshaker.MainActivity" />
+            android:name=".ChooseFart"
+            android:label="@string/title_activity_choose_fart" >
         </activity>
     </application>
 

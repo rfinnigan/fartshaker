@@ -23,7 +23,7 @@ public class MainActivity extends Activity{
 	public final static String EXTRA_MESSAGE = "com.rfinnigan.fartshaker.MESSAGE";
 
 	private MediaPlayer mp;
-	private static int fartId=R.raw.fart0;
+	public static int fartId=R.raw.fart0;
 	private static int fartSoundsArray[] = fillSoundsArray();
 
 	//string for logcat documentation
@@ -94,7 +94,7 @@ public class MainActivity extends Activity{
 	 * called when select fart button is pressed
 	 */
 	public void launchFartSelection(View view){
-		Intent intent = new Intent(this, SelectFartActivity.class);
+		Intent intent = new Intent(this, ChooseFart.class);
 		startActivity(intent);
 	}
 
