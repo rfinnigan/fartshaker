@@ -20,11 +20,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends Activity{
-	public final static String EXTRA_MESSAGE = "com.rfinnigan.fartshaker.MESSAGE";
+	//public final static String EXTRA_MESSAGE = "com.rfinnigan.fartshaker.MESSAGE";
 
 	private MediaPlayer mp;
-	public static int fartId=R.raw.fart0;
-	private static int fartSoundsArray[] = fillSoundsArray();
+	private static FartSound farts = new FartSound();
+	//private static int fartId=R.raw.fart0;
+	
 
 	//string for logcat documentation
 	private final static String TAG = "fart";
@@ -60,28 +61,20 @@ public class MainActivity extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	public static int[] fillSoundsArray(){
-		Field[] ID_Fields = R.raw.class.getFields();
-		int[] resArray = new int[ID_Fields.length];
-		for(int i = 0; i < ID_Fields.length; i++) {
-			try {
-				resArray[i] = ID_Fields[i].getInt(null);
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return resArray;
+	
+	//getter and setter methods for fartId
+	public int getFartId(){
+		return farts.getCurrentFartID();
 	}
-
-	/**
-	 * called when fart button is pressed
-	 */
+	public static void setFart(int i){
+		farts.setFart(i);
+	}
+	
 
 	public void playFart(View view) {
 
 		//create media player & have mediaplayer play selected fart sound
-		mp = MediaPlayer.create(this, fartId);
+		mp = MediaPlayer.create(this, getFartId());
 		mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
 			public void onCompletion(MediaPlayer player) {
 				player.release();  
@@ -126,8 +119,8 @@ public class MainActivity extends Activity{
 							rootView.getContext(),android.R.layout.simple_spinner_dropdown_item);
 			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			//fill with Strings (of fart names from Resources)
-			for (int i=0; i<fartSoundsArray.length;i++){
-				adapter.add(getResources().getResourceEntryName(fartSoundsArray[i]));
+			for (int i=0; i<farts.getNumberOfFarts();i++){
+				adapter.add(getResources().getResourceEntryName(farts.getSpecificFart(i).getId()));
 			}
 			//pass the array adapter to the spinner
 			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
@@ -137,7 +130,8 @@ public class MainActivity extends Activity{
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int pos, long id) {
-					fartId=fartSoundsArray[pos];
+					setFart(pos);
+					
 					Toast.makeText(
 							parent.getContext(),
 							"The fart is "

@@ -2,23 +2,32 @@ package com.rfinnigan.fartshaker;
 
 import java.lang.reflect.Field;
 
+import android.util.Log;
+/**
+ * Object for storing the array of resource ID's for the fart sounds and the currently selected fart sound
+ * @author ruairidhfinnigan
+ *
+ */
+
 public class FartSound {
 
 	/**
 	 * @param args
 	 */
 	public final static int DEFAULT_FART = 0;
-	private static int fartSoundsArray[] = fillSoundsArray();
-	private int fart = DEFAULT_FART;
+	private static Fart[] fartSoundsArray = fillSoundsArray();
+	private int currentFart = DEFAULT_FART;
 	
 
 	//method to fill array with resource ID's of fart sounds
-	private static int[] fillSoundsArray(){
+	private static Fart[] fillSoundsArray(){
 		Field[] ID_Fields = R.raw.class.getFields();
-		int[] resArray = new int[ID_Fields.length];
+		
+		Fart[] resArray = new Fart[ID_Fields.length];;
 		for(int i = 0; i < ID_Fields.length; i++) {
 			try {
-				resArray[i] = ID_Fields[i].getInt(null);
+				Fart temp = new Fart (ID_Fields[i].getInt(null));
+				resArray[i] = temp;
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -28,21 +37,31 @@ public class FartSound {
 	}
 
 	//setter and getter methods for fart
-	public int setFart(int i){
+	public void setFart(int i){
 		if(i<fartSoundsArray.length && i>=0){
-			return fartSoundsArray[i];
+			currentFart=i;
 		}
 		else{
-			return fartSoundsArray[DEFAULT_FART];
+			currentFart=DEFAULT_FART;
+			
 		}
 	}
-	public int getFart(){
-		return fart;
+	public Fart getCurrentFart(){
+		return fartSoundsArray[currentFart];
 	}
-	public int getFartID(){
+	public int getCurrentFartID(){
+		return fartSoundsArray[currentFart].getId();
 
-		return fartSoundsArray[fart];
+	}
+	public Fart getSpecificFart(int i){
+		return fartSoundsArray[i];
+	}
+	public int getSpecificFartID(int i){
+		return fartSoundsArray[i].getId();
 
+	}
+	public int getNumberOfFarts(){
+		return fartSoundsArray.length;
 	}
 
 }
