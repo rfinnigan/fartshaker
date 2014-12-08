@@ -1,7 +1,7 @@
 package com.rfinnigan.fartshaker;
 
 
-import java.lang.reflect.Field;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,11 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
+
 
 public class MainActivity extends Activity{
 	//public final static String EXTRA_MESSAGE = "com.rfinnigan.fartshaker.MESSAGE";
@@ -81,7 +77,7 @@ public class MainActivity extends Activity{
 	public void playFart(View view) {
 
 		farts.getCurrentFart().playFart(this);
-	
+
 
 	}
 	/**
