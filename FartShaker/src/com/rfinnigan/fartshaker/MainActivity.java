@@ -24,11 +24,9 @@ public class MainActivity extends Activity{
 
 	private MediaPlayer mp;
 	private static FartSound farts = new FartSound();
-	//private static int fartId=R.raw.fart0;
-	
 
-	//string for logcat documentation
-	private final static String TAG = "fart";
+	private static final int PICK_FART_REQUEST=1; // request code for choose fart activity
+	private final static String TAG = "fart"; //string for logcat documentation
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +59,25 @@ public class MainActivity extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	//getter and setter methods for fartId
+
+	//getter and setter methods for fartIds
 	public int getFartId(){
 		return farts.getCurrentFartID();
 	}
 	public static void setFart(int i){
 		farts.setFart(i);
 	}
-	
+	public static int getNumberOfFarts(){
+		return farts.getNumberOfFarts();
+	}
+	public static int getSpecificFartId(int i){
+		return farts.getSpecificFartID(i);
+	}
 
+	/**
+	 * called when the fart button is pressed
+	 * 
+	 */
 	public void playFart(View view) {
 
 		//create media player & have mediaplayer play selected fart sound
@@ -87,8 +94,19 @@ public class MainActivity extends Activity{
 	 * called when select fart button is pressed
 	 */
 	public void launchFartSelection(View view){
-		Intent intent = new Intent(this, ChooseFart.class);
-		startActivity(intent);
+		Intent pickFartIntent = new Intent(this, ChooseFart.class);
+		startActivityForResult(pickFartIntent, PICK_FART_REQUEST);
+	}
+	/**
+	 * onActivityResult method to handle fart choice
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == PICK_FART_REQUEST){
+			if(resultCode== RESULT_OK){
+				setFart(data.getIntExtra("fart", 0));
+			}
+		}
 	}
 
 
@@ -111,7 +129,7 @@ public class MainActivity extends Activity{
 
 
 			/**
-			 * populate the spinner manually using array of Fart Sound Resource Id's
+			 * populate the spinner manually using the Fart Sound Resource Id's
 			 */
 			//first create an empty array adapter
 			ArrayAdapter<CharSequence> adapter = 
@@ -131,7 +149,7 @@ public class MainActivity extends Activity{
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int pos, long id) {
 					setFart(pos);
-					
+
 					Toast.makeText(
 							parent.getContext(),
 							"The fart is "
