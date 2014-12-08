@@ -53,13 +53,9 @@ public class ChooseFart extends Activity {
 	 * method called when ok button is pressed
 	 */
 	public void done(View view){
-		setResult(RESULT_OK, resultIntent);
-		Toast.makeText(
-	    		getBaseContext(),
-	    		"The fart is "
-	    				+ resultIntent.getIntExtra("fart", 0),
-	    				Toast.LENGTH_LONG).show();
-	    finish();
+
+		
+		finish();
 	}
 
 	/**
@@ -91,20 +87,23 @@ public class ChooseFart extends Activity {
 			//pass the array adapter to the spinner
 			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
 			fartSelector.setAdapter(adapter);
-
+			
 			//set on item selected listener to set the fartId to the selected fart sound
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+				
+				//boolean to check if this is first selection
+				boolean firstSelection = true;
+				
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int pos, long id) {
-					
-					//add the fart number to the intent
-				    resultIntent.putExtra("fart", pos);
-				    
-					
-					
-					
-
-				    
+					//if this is first selection(ie spinner defaulting to option 1) do nothing except change boolean
+					if(firstSelection==true){
+						firstSelection=false;
+					}
+					//if this isnt the first selection set the fart to the number selected
+					else{
+					MainActivity.setFart(pos);
+					}
 				}
 
 

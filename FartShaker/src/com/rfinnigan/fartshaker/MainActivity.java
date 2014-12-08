@@ -4,6 +4,7 @@ package com.rfinnigan.fartshaker;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,17 +17,18 @@ import android.view.ViewGroup;
 
 
 public class MainActivity extends Activity{
-	//public final static String EXTRA_MESSAGE = "com.rfinnigan.fartshaker.MESSAGE";
 
 	private MediaPlayer mp;
 	private static FartSound farts = new FartSound();
+	private static MainActivity instance;
 
-	private static final int PICK_FART_REQUEST=1; // request code for choose fart activity
+	
 	private final static String TAG = "fart"; //string for logcat documentation
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		instance = this;
 		setContentView(R.layout.activity_main);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
@@ -62,12 +64,18 @@ public class MainActivity extends Activity{
 	}
 	public static void setFart(int i){
 		farts.setFart(i);
+		farts.getCurrentFart().playFart(getContext());
+		
 	}
 	public static int getNumberOfFarts(){
 		return farts.getNumberOfFarts();
 	}
 	public static int getSpecificFartId(int i){
 		return farts.getSpecificFartID(i);
+	}
+	//getter method for context
+	public static Context getContext(){
+		return instance;
 	}
 
 	/**
@@ -77,27 +85,16 @@ public class MainActivity extends Activity{
 	public void playFart(View view) {
 
 		farts.getCurrentFart().playFart(this);
-
-
 	}
+	
 	/**
 	 * called when select fart button is pressed
 	 */
 	public void launchFartSelection(View view){
 		Intent pickFartIntent = new Intent(this, ChooseFart.class);
-		startActivityForResult(pickFartIntent, PICK_FART_REQUEST);
+		startActivity(pickFartIntent);
 	}
-	/**
-	 * onActivityResult method to handle fart choice
-	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == PICK_FART_REQUEST){
-			if(resultCode== RESULT_OK){
-				setFart(data.getIntExtra("fart", 0));
-			}
-		}
-	}
+	
 
 
 	/**
