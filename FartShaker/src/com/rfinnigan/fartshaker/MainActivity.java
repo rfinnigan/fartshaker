@@ -80,14 +80,8 @@ public class MainActivity extends Activity{
 	 */
 	public void playFart(View view) {
 
-		//create media player & have mediaplayer play selected fart sound
-		mp = MediaPlayer.create(this, getFartId());
-		mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-			public void onCompletion(MediaPlayer player) {
-				player.release();  
-				Log.i(TAG,"player released");	   
-			}});
-		mp.start();
+		farts.getCurrentFart().playFart(this);
+	
 
 	}
 	/**
