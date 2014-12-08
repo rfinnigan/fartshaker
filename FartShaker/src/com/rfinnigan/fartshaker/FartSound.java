@@ -2,7 +2,7 @@ package com.rfinnigan.fartshaker;
 
 import java.lang.reflect.Field;
 
-import android.util.Log;
+
 /**
  * Object for storing the array of resource ID's for the fart sounds and the currently selected fart sound
  * @author ruairidhfinnigan

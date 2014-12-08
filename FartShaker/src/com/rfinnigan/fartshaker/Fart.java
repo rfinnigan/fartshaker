@@ -2,7 +2,7 @@ package com.rfinnigan.fartshaker;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
+
 
 public class Fart {
 	private int fartId;

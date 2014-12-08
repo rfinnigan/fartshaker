@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,12 +18,12 @@ import android.view.ViewGroup;
 
 public class MainActivity extends Activity{
 
-	private MediaPlayer mp;
+	
 	private static FartSound farts = new FartSound();
 	private static MainActivity instance;
 
 	
-	private final static String TAG = "fart"; //string for logcat documentation
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
