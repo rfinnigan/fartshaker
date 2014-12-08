@@ -1,7 +1,6 @@
 package com.rfinnigan.fartshaker;
 
 import android.app.Activity;
-
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,8 +51,6 @@ public class ChooseFart extends Activity {
 	 * method called when ok button is pressed
 	 */
 	public void done(View view){
-
-		
 		finish();
 	}
 
@@ -86,13 +83,13 @@ public class ChooseFart extends Activity {
 			//pass the array adapter to the spinner
 			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
 			fartSelector.setAdapter(adapter);
-			
+
 			//set on item selected listener to set the fartId to the selected fart sound
 			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
-				
+
 				//boolean to check if this is first selection
 				boolean firstSelection = true;
-				
+
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int pos, long id) {
 					//if this is first selection(ie spinner defaulting to option 1) do nothing except change boolean
@@ -101,7 +98,7 @@ public class ChooseFart extends Activity {
 					}
 					//if this isnt the first selection set the fart to the number selected
 					else{
-					MainActivity.setFart(pos);
+						MainActivity.setFart(pos);
 					}
 				}
 
