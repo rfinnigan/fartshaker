@@ -99,7 +99,7 @@ public class ChooseFart extends Activity {
 					
 					//add the fart number to the intent
 				    resultIntent.putExtra("fart", pos);
-				    MainActivity.
+				    
 					
 					
 					

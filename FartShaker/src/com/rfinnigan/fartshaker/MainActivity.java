@@ -125,42 +125,6 @@ public class MainActivity extends Activity{
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
-
-
-
-			/**
-			 * populate the spinner manually using the Fart Sound Resource Id's
-			 */
-			//first create an empty array adapter
-			ArrayAdapter<CharSequence> adapter = 
-					new ArrayAdapter <CharSequence>(
-							rootView.getContext(),android.R.layout.simple_spinner_dropdown_item);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			//fill with Strings (of fart names from Resources)
-			for (int i=0; i<farts.getNumberOfFarts();i++){
-				adapter.add(getResources().getResourceEntryName(farts.getSpecificFart(i).getId()));
-			}
-			//pass the array adapter to the spinner
-			Spinner fartSelector = (Spinner) rootView.findViewById(R.id.fart_selector);
-			fartSelector.setAdapter(adapter);
-
-			//set on item selected listener to set the fartId to the selected fart sound
-			fartSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
-				public void onItemSelected(AdapterView<?> parent, View view,
-						int pos, long id) {
-					setFart(pos);
-
-					Toast.makeText(
-							parent.getContext(),
-							"The fart is "
-									+ parent.getItemAtPosition(pos).toString(),
-									Toast.LENGTH_LONG).show();
-				}
-
-
-				public void onNothingSelected(AdapterView<?> parent) {
-				}
-			});
 			return rootView;
 		}
 	}

@@ -22,10 +22,6 @@
         android:onClick="launchFartSelection"
         android:text="@string/button_select" />
 
-    <Spinner
-        android:id="@+id/fart_selector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom" />
+    
 
 </LinearLayout>
